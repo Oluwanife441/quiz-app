@@ -12,6 +12,7 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [topicScores, setTopicScores] = useState({});
   const [timeLeft, setTimeLeft] = useState(60);
+  const [answers, setAnswers] = useState({});
   const [isAnswered, setIsAnswered] = useState(false);
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const Quiz = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setTimeLeft(60);
-      setIsAnswered(false);
+      setIsAnswered(!!answers[currentQuestion + 1]);
     } else {
       navigate("/results", {
         state: { score, totalQuestions: questions.length, topicScores },
@@ -35,16 +36,40 @@ const Quiz = () => {
     }
   };
 
+  const goToPreviousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+      setTimeLeft(60);
+      setIsAnswered(!!answers[currentQuestion - 1]);
+    }
+  };
+
   const handleAnswer = (selectedOption) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [currentQuestion]: selectedOption,
+    }));
     setIsAnswered(true);
+
     const currentTopic = questions[currentQuestion].topic;
     if (selectedOption === questions[currentQuestion].correct) {
-      setScore(score + 1);
-      setTopicScores((prev) => ({
-        ...prev,
-        [currentTopic]: (prev[currentTopic] || 0) + 1,
-      }));
+      if (!answers[currentQuestion]) {
+        setScore(score + 1);
+        setTopicScores((prev) => ({
+          ...prev,
+          [currentTopic]: (prev[currentTopic] || 0) + 1,
+        }));
+      }
+    } else {
+      if (answers[currentQuestion] === questions[currentQuestion].correct) {
+        setScore(score - 1);
+        setTopicScores((prev) => ({
+          ...prev,
+          [currentTopic]: (prev[currentTopic] || 1) - 1,
+        }));
+      }
     }
+
     setTimeout(goToNextQuestion, 1000);
   };
 
@@ -58,11 +83,28 @@ const Quiz = () => {
           options={questions[currentQuestion].options}
           onAnswer={handleAnswer}
           isAnswered={isAnswered}
+          selectedOption={answers[currentQuestion]}
           correctAnswer={questions[currentQuestion].correct}
         />
       </div>
+      <div className="navigation-buttons">
+        <button
+          onClick={goToPreviousQuestion}
+          className="prev-button"
+          disabled={currentQuestion === 0}
+        >
+          Previous
+        </button>
+        <button
+          onClick={goToNextQuestion}
+          className="prev-button"
+          disabled={currentQuestion === questions.length - 1}
+        >
+          Next
+        </button>
+      </div>
       <div className="score-display">
-        Score: {score} / {currentQuestion + 1}
+        Score: {score} / {questions.length}
       </div>
     </div>
   );
