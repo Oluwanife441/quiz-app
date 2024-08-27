@@ -10,6 +10,7 @@ const Quiz = () => {
   const selectedTopics = location.state?.topics || [];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const [topicScores, setTopicScores] = useState({});
   const [timeLeft, setTimeLeft] = useState(60);
   const [isAnswered, setIsAnswered] = useState(false);
   const navigate = useNavigate();
@@ -29,15 +30,20 @@ const Quiz = () => {
       setIsAnswered(false);
     } else {
       navigate("/results", {
-        state: { score, totalQuestions: questions.length },
+        state: { score, totalQuestions: questions.length, topicScores },
       });
     }
   };
 
   const handleAnswer = (selectedOption) => {
     setIsAnswered(true);
+    const currentTopic = questions[currentQuestion].topic;
     if (selectedOption === questions[currentQuestion].correct) {
       setScore(score + 1);
+      setTopicScores((prev) => ({
+        ...prev,
+        [currentTopic]: (prev[currentTopic] || 0) + 1,
+      }));
     }
     setTimeout(goToNextQuestion, 1000);
   };
@@ -66,8 +72,14 @@ const Quiz = () => {
 const fetchQuestionsByTopics = (selectedTopics) => {
   const allQuestions = {
     Mathematics: [
-      { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correct: 1 },
       {
+        topic: "Mathematics",
+        question: "What is 2 + 2?",
+        options: ["3", "4", "5", "6"],
+        correct: 1,
+      },
+      {
+        topic: "Mathematics",
         question: "What is 10 * 5?",
         options: ["40", "50", "60", "70"],
         correct: 1,
@@ -75,11 +87,13 @@ const fetchQuestionsByTopics = (selectedTopics) => {
     ],
     Literature: [
       {
+        topic: "Literature",
         question: "Who wrote Hamlet?",
         options: ["Shakespeare", "Dickens", "Austen", "Twain"],
         correct: 0,
       },
       {
+        topic: "Literature",
         question: "Who wrote 1984?",
         options: ["Orwell", "Huxley", "Bradbury", "Atwood"],
         correct: 0,
@@ -87,11 +101,13 @@ const fetchQuestionsByTopics = (selectedTopics) => {
     ],
     Science: [
       {
+        topic: "Science",
         question: "What is the chemical symbol for water?",
         options: ["H2O", "CO2", "NaCl", "O2"],
         correct: 0,
       },
       {
+        topic: "Science",
         question: "What is the closest planet to the Sun?",
         options: ["Venus", "Mars", "Mercury", "Earth"],
         correct: 2,
@@ -99,11 +115,13 @@ const fetchQuestionsByTopics = (selectedTopics) => {
     ],
     History: [
       {
+        topic: "History",
         question: "In which year did World War II end?",
         options: ["1943", "1944", "1945", "1946"],
         correct: 2,
       },
       {
+        topic: "History",
         question: "Who was the first President of the United States?",
         options: ["Adams", "Jefferson", "Washington", "Lincoln"],
         correct: 2,

@@ -5,22 +5,21 @@ import ScoreSummary from "../components/ScoreSummary";
 import "../styles/Result.css";
 const Results = () => {
   const location = useLocation();
-  const score = location.state?.score || 0;
+  const { score, totalQuestions, topicScores } = location.state || {};
 
-  // Placeholder data for the chart
-  const chartData = {
-    Mathematics: 3,
-    Science: 2,
-    History: 4,
-    Literature: 1,
-  };
+  if (!score && score !== 0) {
+    return <div>No results available. Please take the quiz first.</div>;
+  }
 
   return (
     <div className="results-container">
       <h1>Quiz Results</h1>
-      <ResultChart data={chartData} />
-      <ScoreSummary score={score} total={10} />{" "}
-      {/* Assuming 10 questions total */}
+      {topicScores && Object.keys(topicScores).length > 0 ? (
+        <ResultChart data={topicScores} />
+      ) : (
+        <p>No topic scores available.</p>
+      )}
+      <ScoreSummary score={score} total={totalQuestions} />
       <Link to="/" className="restart-button">
         Restart Quiz
       </Link>
