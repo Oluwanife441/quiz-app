@@ -21,7 +21,7 @@
 
 .option-button {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-color: #3498db;
+  background-color: #8b4513;
   color: white;
   padding: 15px;
   border: none;
@@ -31,7 +31,7 @@
 }
 
 .option-button:hover {
-  background-color: #2980b9;
+  background-color: #d2691e;
 }
 
 .timer-container {
