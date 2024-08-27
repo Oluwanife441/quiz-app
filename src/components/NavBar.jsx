@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
-import "../styles/Navbar.css";
+import "../styles/Home.css";
 
 const Navbar = () => {
   const navAnimation = useSpring({
