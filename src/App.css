@@ -1,0 +1,77 @@
+/* General App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f4f9; /* Light grey background for the whole app */
+}
+
+/* Navigation Bar Styles */
+.navbar {
+  background-color: #4a0d8b; /* Purple background for the navbar */
+  padding: 10px 20px;
+  color: #ffffff; /* White text color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* Page Content */
+.page-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Buttons */
+button {
+  background-color: #4a0d8b; /* Purple button background */
+  color: #ffffff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #6a1b9a; /* Darker purple on hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+button:active {
+  background-color: #3e0a61; /* Even darker purple on click */
+}
+
+/* Footer (if needed) */
+.footer {
+  background-color: #4a0d8b; /* Purple background for the footer */
+  color: #ffffff; /* White text color */
+  text-align: center;
+  padding: 10px;
+}

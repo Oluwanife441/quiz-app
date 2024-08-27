@@ -1,0 +1,48 @@
+/* src/styles/Home.css */
+
+.home-container {
+  text-align: center;
+  padding: 50px 0;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.topic-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.topic-btn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.topic-btn.selected {
+  background-color: #2ecc71;
+}
+
+.topic-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.start-quiz-btn {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 5px;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+}

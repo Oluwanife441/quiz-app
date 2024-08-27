@@ -1,0 +1,11 @@
+.timer {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  background: rgba(106, 13, 173, 0.1); /* Light purple background */
+  box-shadow: 0 4px 10px var(--shadow-color);
+  backdrop-filter: blur(5px);
+}
